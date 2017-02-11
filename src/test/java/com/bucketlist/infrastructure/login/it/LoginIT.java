@@ -41,11 +41,11 @@ public class LoginIT {
 				.getForEntity("/login", String.class);
 		assertNotNull(loginResponse);
 
-		final ResponseEntity<BucketListDTO> userBucketListResponse = restTemplate.withBasicAuth(user.getName(), user.getPassword()).getForEntity("/bucket-list",
-				BucketListDTO.class);
+		final ResponseEntity<BucketListDTO> userBucketListResponse = restTemplate
+				.withBasicAuth(user.getName(), user.getPassword()).getForEntity("/bucket-list", BucketListDTO.class);
 		assertNotNull(userBucketListResponse);
 		assertNotNull(userBucketListResponse.getBody());
-		
+
 		final BucketListDTO userBucketList = userBucketListResponse.getBody();
 		assertThat(userBucketList.getDescription(), is(equalTo(user.getName() + " Bucket List")));
 		assertThat(userBucketList.getUser().getName(), is(equalTo(user.getName())));

@@ -9,9 +9,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.bucketlist.domain.model.user.User;
 import com.bucketlist.domain.shared.AbstractBuilder;
 import com.bucketlist.domain.shared.AbstractEntity;
+import com.bucketlist.infrastructure.spring.security.user.model.User;
 import com.google.common.base.MoreObjects;
 
 @SuppressWarnings("serial")

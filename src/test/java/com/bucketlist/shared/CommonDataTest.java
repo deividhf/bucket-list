@@ -8,8 +8,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import com.bucketlist.domain.model.user.UserRepository;
-import com.bucketlist.interfaces.rest.user.dto.UserDTO;
+import com.bucketlist.infrastructure.spring.security.user.model.UserRepository;
+import com.bucketlist.infrastructure.spring.security.user.rest.dto.UserDTO;
 
 @Component
 public class CommonDataTest {

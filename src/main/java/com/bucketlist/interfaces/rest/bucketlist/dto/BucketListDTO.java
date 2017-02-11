@@ -2,7 +2,7 @@ package com.bucketlist.interfaces.rest.bucketlist.dto;
 
 import javax.validation.constraints.NotNull;
 
-import com.bucketlist.interfaces.rest.user.dto.UserDTO;
+import com.bucketlist.infrastructure.spring.security.user.rest.dto.UserDTO;
 
 public class BucketListDTO {
 

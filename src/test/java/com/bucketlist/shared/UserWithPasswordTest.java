@@ -1,6 +1,6 @@
 package com.bucketlist.shared;
 
-import com.bucketlist.interfaces.rest.user.dto.UserDTO;
+import com.bucketlist.infrastructure.spring.security.user.rest.dto.UserDTO;
 
 public class UserWithPasswordTest {
 
