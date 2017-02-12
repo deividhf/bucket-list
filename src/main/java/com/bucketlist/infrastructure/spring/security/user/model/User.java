@@ -2,7 +2,6 @@ package com.bucketlist.infrastructure.spring.security.user.model;
 
 import java.util.Objects;
 import java.util.Optional;
-import java.util.regex.Pattern;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -17,7 +16,6 @@ import com.bucketlist.domain.shared.AbstractEntity;
 import com.bucketlist.domain.shared.specification.Validator;
 import com.bucketlist.infrastructure.spring.security.user.model.email.Email;
 import com.google.common.base.MoreObjects;
-import static com.google.common.base.Preconditions.checkArgument;
 import com.querydsl.core.annotations.PropertyType;
 import com.querydsl.core.annotations.QueryType;
 
@@ -76,12 +74,6 @@ public class User extends AbstractEntity {
 	public String getName() {
 		return name;
 	}
-	
-	private void setName(final String name) {
-		checkArgument(Pattern.compile("[a-zA-Z0-9\\._\\-]{3,}").matcher(name).matches(), 
-				"Invalid login name");
-		this.name = name;
-	}
 
 	public Optional<Email> getEmail() {
 		return Optional.ofNullable(Email.of(email.getAddress()));
@@ -118,17 +110,17 @@ public class User extends AbstractEntity {
 		}
 
 		public Builder withName(final String name) {
-			entity.setName(name);
+			this.entity.name = name;
 			return this;
 		}
 
 		public Builder withEmail(final Email email) {
-			entity.email = email;
+			this.entity.email = email;
 			return this;
 		}
 
 		public Builder withPassword(final String password) {
-			entity.setPassword(password);
+			this.entity.setPassword(password);
 			return this;
 		}
 
