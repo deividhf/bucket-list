@@ -19,8 +19,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.bucketlist.infrastructure.spring.security.user.model.UserRepository;
 import com.bucketlist.infrastructure.spring.security.user.rest.dto.UserDTO;
+import com.bucketlist.shared.CommonDataTest;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -30,7 +30,7 @@ public class UserResourceIT {
 	@Inject
 	private TestRestTemplate restTemplate;
 	@Inject
-	private UserRepository userRepository;
+	private CommonDataTest commonData;
 
 	@Test
 	public void testCRUD() {
@@ -70,6 +70,6 @@ public class UserResourceIT {
 
 	@After
 	public void tearDown() {
-		userRepository.deleteAll();
+		commonData.deleteCommonData();
 	}
 }
