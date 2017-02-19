@@ -1,10 +1,14 @@
 package com.bucketlist.shared;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 import javax.inject.Inject;
 
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -30,9 +34,10 @@ public class CommonDataTest {
 				.withEmail("user@email.com")
 				.build();
 		final ResponseEntity<UserDTO> userSavedResponse = restTemplate.postForEntity("/users", user, UserDTO.class);
+		assertThat(userSavedResponse.getStatusCode(), is(equalTo(HttpStatus.CREATED)));
 		final UserDTO userSaved = userSavedResponse.getBody();
 		assertNotNull(userSaved);
-		return new UserWithPasswordTest(user, password);
+		return new UserWithPasswordTest(userSaved, password);
 	}
 	
 	public void deleteCommonData() {

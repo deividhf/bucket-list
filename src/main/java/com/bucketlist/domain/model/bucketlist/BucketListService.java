@@ -15,6 +15,11 @@ public class BucketListService {
 	
 	public BucketList findByUserName(final String userName) {
 		return bucketListRepository.findByUserName(userName)
-				.orElseThrow(() -> new BadRequestException("Bucket list not found to the user"));
+				.orElseThrow(() -> new BadRequestException("Bucket list not found for user"));
+	}
+	
+	public BucketList findByIdAndUserName(final Long id, final String userName) {
+		return bucketListRepository.findByIdAndUserName(id, userName)
+				.orElseThrow(() -> new BadRequestException("Bucket list not found"));
 	}
 }
