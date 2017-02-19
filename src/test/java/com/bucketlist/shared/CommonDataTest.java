@@ -8,6 +8,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import com.bucketlist.domain.model.bucketlist.BucketListRepository;
 import com.bucketlist.infrastructure.spring.security.user.model.UserRepository;
 import com.bucketlist.infrastructure.spring.security.user.rest.dto.UserDTO;
 
@@ -18,6 +19,8 @@ public class CommonDataTest {
 	private TestRestTemplate restTemplate;
 	@Inject
 	private UserRepository userRepository;
+	@Inject
+	private BucketListRepository bucketListRepository;
 	
 	public UserWithPasswordTest createUser() {
 		final String password = "user";
@@ -33,6 +36,7 @@ public class CommonDataTest {
 	}
 	
 	public void deleteCommonData() {
+		bucketListRepository.deleteAll();
 		userRepository.deleteAll();
 	}
 }

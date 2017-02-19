@@ -40,8 +40,8 @@ public class UserResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<UserDTO> save(@Valid @RequestBody final UserDTO user) {
-		final User userSaved = userRepository.save(userConverter.toEntity(user, User.Builder.create()));
+	public ResponseEntity<UserDTO> create(@Valid @RequestBody final UserDTO user) {
+		final User userSaved = userService.save(userConverter.toEntity(user, User.Builder.create()));
 		final URI location = linkTo(UserResource.class).slash(userSaved.getName()).toUri();
 		return ResponseEntity.created(location)
 				.body(userConverter.toRepresentation(userSaved));
