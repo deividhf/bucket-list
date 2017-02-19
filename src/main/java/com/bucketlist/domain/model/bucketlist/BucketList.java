@@ -30,6 +30,12 @@ public class BucketList extends AbstractEntity {
 	BucketList() {
 	}
 	
+	private BucketList(final Long id, final User user, final String description) {
+		super(id);
+		this.user = user;
+		this.description = description;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(user, description);
@@ -72,7 +78,7 @@ public class BucketList extends AbstractEntity {
 		}
 		
 		public static final Builder from(final BucketList bucketList) {
-			return new Builder(bucketList);
+			return new Builder(new BucketList(bucketList.id, bucketList.user, bucketList.description));
 		}
 		
 		public Builder forUser(final User user) {

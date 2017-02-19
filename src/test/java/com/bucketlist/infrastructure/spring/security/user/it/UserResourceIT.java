@@ -33,7 +33,7 @@ public class UserResourceIT {
 	private CommonDataTest commonData;
 
 	@Test
-	public void testCRUD() {
+	public void crudTest() {
 		// request with empty user
 		final ResponseEntity<UserDTO> responseEmptyUser = restTemplate.postForEntity("/users",
 				UserDTO.builder().build(), UserDTO.class);
@@ -63,6 +63,7 @@ public class UserResourceIT {
 				.getForEntity("/users", UserDTO.class);
 		assertNotNull(userFoundResponse);
 		assertNotNull(userFoundResponse.getBody());
+		assertThat(userFoundResponse.getStatusCode(), is(equalTo(HttpStatus.OK)));
 		final UserDTO userFound = userFoundResponse.getBody();
 		assertThat(userFound.getName(), is(equalTo(userUpdate.getName())));
 		assertThat(userFound.getEmail(), is(equalTo(userUpdate.getEmail())));

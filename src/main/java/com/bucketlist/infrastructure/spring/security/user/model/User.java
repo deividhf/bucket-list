@@ -41,13 +41,13 @@ public class User extends AbstractEntity {
 		this.role = Role.USER;
 	}
 
-	private User(final Long id, final String name, final Optional<Email> email, final String password,
+	private User(final Long id, final String name, final Email email, final String password,
 			final Role role) {
 		super(id);
 		this.name = name;
 		this.role = role;
-		this.email = email.orElse(null);
-		this.password = new BCryptPasswordEncoder().encode(password);
+		this.email = email;
+		this.password = password;
 	}
 	
 	@Override
@@ -92,7 +92,7 @@ public class User extends AbstractEntity {
 	}
 
 	public User changePassword(final String newPassword) {
-		return new User(id, name, Optional.ofNullable(email), new BCryptPasswordEncoder().encode(newPassword), role);
+		return new User(id, name, email, new BCryptPasswordEncoder().encode(newPassword), role);
 	}
 
 	public static final class Builder extends AbstractBuilder<User> {
@@ -106,7 +106,7 @@ public class User extends AbstractEntity {
 		}
 
 		public static Builder from(final User user) {
-			return new Builder(user);
+			return new Builder(new User(user.id, user.name, user.email, user.password, user.role));
 		}
 
 		public Builder withName(final String name) {

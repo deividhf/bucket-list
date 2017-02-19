@@ -24,7 +24,7 @@ import com.bucketlist.shared.UserWithPasswordTest;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("integration-test")
-public class LoginIT {
+public class LoginResourceIT {
 
 	@Inject
 	private TestRestTemplate restTemplate;
