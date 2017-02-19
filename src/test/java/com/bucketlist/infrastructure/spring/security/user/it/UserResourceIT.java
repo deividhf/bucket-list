@@ -1,4 +1,4 @@
-package com.bucketlist.infrastructure.user.it;
+package com.bucketlist.infrastructure.spring.security.user.it;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -24,7 +24,7 @@ import com.bucketlist.shared.CommonDataTest;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test")
+@ActiveProfiles("integration_test")
 public class UserResourceIT {
 
 	@Inject

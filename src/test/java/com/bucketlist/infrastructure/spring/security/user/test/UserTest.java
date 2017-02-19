@@ -1,4 +1,4 @@
-package com.bucketlist.infrastructure.user.test;
+package com.bucketlist.infrastructure.spring.security.user.test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

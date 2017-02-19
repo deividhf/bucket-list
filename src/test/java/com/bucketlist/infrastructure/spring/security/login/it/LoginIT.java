@@ -1,4 +1,4 @@
-package com.bucketlist.infrastructure.login.it;
+package com.bucketlist.infrastructure.spring.security.login.it;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -23,7 +23,7 @@ import com.bucketlist.shared.UserWithPasswordTest;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test")
+@ActiveProfiles("integration_test")
 public class LoginIT {
 
 	@Inject

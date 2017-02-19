@@ -22,7 +22,7 @@ import com.bucketlist.shared.UserWithPasswordTest;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test")
+@ActiveProfiles("integration_test")
 public class BucketListIT {
 
 	@Inject

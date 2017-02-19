@@ -1,4 +1,4 @@
-package com.bucketlist.infrastructure.user.email.test;
+package com.bucketlist.infrastructure.spring.security.user.email.test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;

@@ -1,4 +1,4 @@
-package com.bucketlist.infrastructure.user.it;
+package com.bucketlist.infrastructure.spring.security.user.it;
 
 import javax.inject.Inject;
 
@@ -16,14 +16,17 @@ import com.bucketlist.domain.shared.specification.InvalidSpecificationException;
 import com.bucketlist.infrastructure.spring.security.user.model.User;
 import com.bucketlist.infrastructure.spring.security.user.model.UserRepository;
 import com.bucketlist.infrastructure.spring.security.user.model.email.Email;
+import com.bucketlist.shared.CommonDataTest;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test")
+@ActiveProfiles("integration_test")
 public class UserIT {
 
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
+	@Inject
+	private CommonDataTest commonData;
 	@Inject
 	private UserRepository userRepository;
 
@@ -45,6 +48,6 @@ public class UserIT {
 	
 	@After
 	public void tearDown() {
-		userRepository.deleteAll();
+		commonData.deleteCommonData();
 	}
 }
