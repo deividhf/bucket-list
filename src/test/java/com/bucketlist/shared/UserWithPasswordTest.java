@@ -1,5 +1,7 @@
 package com.bucketlist.shared;
 
+import java.util.Optional;
+
 import com.bucketlist.infrastructure.spring.security.user.rest.dto.UserDTO;
 
 public class UserWithPasswordTest {
@@ -20,7 +22,7 @@ public class UserWithPasswordTest {
 		return password;
 	}
 	
-	public String getEmail() {
+	public Optional<String> getEmail() {
 		return user.getEmail();
 	}
 	

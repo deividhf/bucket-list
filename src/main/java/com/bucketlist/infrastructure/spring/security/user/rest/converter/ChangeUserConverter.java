@@ -13,7 +13,7 @@ public class ChangeUserConverter extends AbstractConverter<User, UserDTO, User.B
 
 	@Override
 	public User toEntity(final UserDTO representation, final Builder builder) {
-		return builder.withEmail(Email.of(representation.getEmail()))
+		return builder.withEmail(representation.getEmail().map(e -> Email.of(e)).orElse(null))
 				.withName(representation.getName())
 				.build();
 	}

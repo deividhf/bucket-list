@@ -1,5 +1,7 @@
 package com.bucketlist.infrastructure.spring.security.user.rest.dto;
 
+import java.util.Optional;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -31,8 +33,8 @@ public class UserDTO {
 		return name;
 	}
 
-	public String getEmail() {
-		return email;
+	public Optional<String> getEmail() {
+		return Optional.ofNullable(email);
 	}
 
 	public String getPassword() {

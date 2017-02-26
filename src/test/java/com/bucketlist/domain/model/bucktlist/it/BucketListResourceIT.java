@@ -19,8 +19,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.bucketlist.interfaces.rest.bucketlist.dto.BucketListDTO;
+import com.bucketlist.interfaces.rest.bucketlist.goal.dto.GoalDTO;
 import com.bucketlist.shared.CommonDataTest;
 import com.bucketlist.shared.UserWithPasswordTest;
+import com.google.common.collect.ImmutableList;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -74,6 +76,52 @@ public class BucketListResourceIT {
 		final BucketListDTO bucketListUpdated = userBucketListUpdatedResponse.getBody();
 		assertThat(bucketListUpdated.getUser().getName(), is(equalTo(bucketListToUpdate.getUser().getName())));
 		assertThat(bucketListUpdated.getDescription(), is(equalTo(bucketListToUpdate.getDescription())));
+	}
+	
+	@Test
+	public void shouldAddGoalsToBucketList() {
+		final UserWithPasswordTest user = commonData.createUser();
+		
+		// get the bucket list from user
+		final ResponseEntity<BucketListDTO> userBucketListResponse = restTemplate
+				.withBasicAuth(user.getName(), user.getPassword()).getForEntity("/bucket-lists", BucketListDTO.class);
+		assertNotNull(userBucketListResponse);
+		assertNotNull(userBucketListResponse.getBody());
+		
+		// add goals
+		final BucketListDTO bucketList = userBucketListResponse.getBody();
+		final GoalDTO travellingLondon = GoalDTO.of("Travelling to London");
+		final GoalDTO travellingAntartic = GoalDTO.of("Travelling to Antartic");
+		final BucketListDTO bucketListWithGoalsAdded = bucketList.withGoals(
+				ImmutableList.of(
+						travellingLondon,
+						travellingAntartic
+				));
+		
+		// 
+		restTemplate.withBasicAuth(user.getName(), user.getPassword()).put("/bucket-lists/{identifier}", 
+				bucketListWithGoalsAdded, bucketListWithGoalsAdded.getIdentifier());
+		
+		// find to verify if the goals were added
+		final ResponseEntity<BucketListDTO> bucketListUpdatedWithGoalsResponse = restTemplate
+				.withBasicAuth(user.getName(), user.getPassword()).getForEntity("/bucket-lists", BucketListDTO.class);
+		assertThat(bucketListUpdatedWithGoalsResponse.getStatusCode(), is(equalTo(HttpStatus.OK)));
+		assertNotNull(bucketListUpdatedWithGoalsResponse);
+		assertNotNull(bucketListUpdatedWithGoalsResponse.getBody());
+		
+		final BucketListDTO bucketListUpdatedWithGoals = bucketListUpdatedWithGoalsResponse.getBody();
+		assertNotNull(bucketListUpdatedWithGoals.getGoals());
+		assertThat(bucketListUpdatedWithGoals.getGoals().size(), is(equalTo(2)));
+		
+		assertNotNull(bucketListUpdatedWithGoals.getGoals().stream()
+				.filter(goal -> goal.getDescription().equals(travellingLondon.getDescription()))
+				.findFirst()
+				.orElse(null));
+		
+		assertNotNull(bucketListUpdatedWithGoals.getGoals().stream()
+				.filter(goal -> goal.getDescription().equals(travellingAntartic.getDescription()))
+				.findFirst()
+				.orElse(null));
 	}
 	
 	@After

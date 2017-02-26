@@ -1,6 +1,7 @@
 package com.bucketlist.infrastructure.spring.security.user.model.email;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Objects;
 
@@ -17,6 +18,7 @@ public class Email {
 	}
 	
 	public static final Email of(final String address) {
+		checkNotNull(address);
 		checkArgument(address.length() <= 255, "Address can'nt have more than 255 characters");
 		checkArgument(EmailValidator.getInstance().isValid(address), "Invalid email address");
 		return new Email(address);

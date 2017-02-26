@@ -15,7 +15,7 @@ public class UserConverter extends AbstractConverter<User, UserDTO, User.Builder
 	public User toEntity(final UserDTO representation, final Builder builder) {
 		return builder.withName(representation.getName())
 				.withPassword(representation.getPassword())
-				.withEmail(Email.of(representation.getEmail()))
+				.withEmail(representation.getEmail().map(e -> Email.of(e)).orElse(null))
 				.build();
 	}
 
