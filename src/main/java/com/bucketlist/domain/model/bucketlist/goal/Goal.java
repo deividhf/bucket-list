@@ -12,17 +12,19 @@ import com.google.common.base.MoreObjects;
 public class Goal {
 
 	private String description;
+	private boolean achieved;
 	
 	Goal() {
 	}
 
-	private Goal(final String description) {
+	private Goal(final String description, final boolean achieved) {
 		this.description = description;
+		this.achieved = achieved;
 	}
 	
-	public static Goal of(String description) {
+	public static Goal of(String description, final boolean achieved) {
 		checkNotNull(description);
-		return new Goal(description);
+		return new Goal(description, achieved);
 	}
 
 	@Override
@@ -48,5 +50,9 @@ public class Goal {
 	
 	public String getDescription() {
 		return description;
+	}
+	
+	public boolean isAchieved() {
+		return achieved;
 	}
 }

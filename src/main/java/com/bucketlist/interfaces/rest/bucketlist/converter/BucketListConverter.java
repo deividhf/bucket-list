@@ -25,7 +25,7 @@ public class BucketListConverter extends AbstractConverter<BucketList, BucketLis
 	public BucketList toEntity(final BucketListDTO representation, final Builder builder) {
 		return builder.withDescription(representation.getDescription())
 				.withGoals(representation.getGoals().stream()
-						.map(goal -> Goal.of(goal.getDescription()))
+						.map(goal -> Goal.of(goal.getDescription(), goal.isAchieved()))
 						.collect(toList()))
 				.build();
 	}
@@ -37,7 +37,7 @@ public class BucketListConverter extends AbstractConverter<BucketList, BucketLis
 				.withDescription(bucketList.getDescription())
 				.withUser(userConverter.toRepresentation(bucketList.getUser()))
 				.withGoals(bucketList.getGoals().stream()
-						.map(goal -> GoalDTO.of(goal.getDescription()))
+						.map(goal -> GoalDTO.of(goal.getDescription(), goal.isAchieved()))
 						.collect(toList()))
 				.build();
 	}
